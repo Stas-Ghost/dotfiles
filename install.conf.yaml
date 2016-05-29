@@ -1,0 +1,16 @@
+
+
+- link:
+    ~/.gitconfig: gitconfig
+    ~/.tmux.conf: tmux.conf
+    ~/.zshenv: zshenv
+    ~/.zshrc: zshrc
+    ~/bin:
+        path: bin/
+        create: true
+    ~/.i3:
+        path: i3/
+        create: true
+    ~/.i3status.conf: i3status.conf
+
+
