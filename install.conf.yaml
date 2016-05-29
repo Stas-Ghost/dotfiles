@@ -5,6 +5,8 @@
     ~/.tmux.conf: tmux.conf
     ~/.zshenv: zshenv
     ~/.zshrc: zshrc
+    ~/.spacemacs: spacemacs
+    ~/notifyosd.zsh: notifyosd.zsh
     ~/bin:
         path: bin/
         create: true
