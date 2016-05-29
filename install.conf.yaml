@@ -6,6 +6,8 @@
     ~/.zshenv: zshenv
     ~/.zshrc: zshrc
     ~/.spacemacs: spacemacs
+    ~/.config/redshift.conf: redshift
+    ~/.config/youtube-dl.conf: youtube-dl
     ~/notifyosd.zsh: notifyosd.zsh
     ~/bin:
         path: bin/

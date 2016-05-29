@@ -1,0 +1,6 @@
+--retries 3
+--continue
+--no-overwrites
+--write-sub  
+--write-auto-sub
+--sub-lang en
