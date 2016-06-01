@@ -3,6 +3,11 @@ export ZSH=$HOME/.oh-my-zsh
 
 setopt HIST_IGNORE_DUPS
 
+#zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+[ -f ~/.ssh/config ] && : ${(A)ssh_config_hosts:=${${${${(@M)${(f)"$(<~/.ssh/config)"}:#Host *}#Host }:#*\**}:#*\?*}}
+[ -f ~/.ssh/known_hosts ] && : ${(A)ssh_known_hosts:=${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*}}
+zstyle ':completion:*:hosts' hosts $ssh_config_hosts $ssh_known_hosts
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -86,20 +91,18 @@ HIST_STAMPS="yyyy-mm-dd"
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-plugins=(debian history sublime lein colored-man colorize cp extract web_search rsync composer rand-quote golang zsh-completions ansible)
+plugins=(pass git debian history sublime lein colored-man colorize cp extract web_search rsync composer rand-quote golang zsh-completions ansible zsh-syntax-highlighting ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
+
+zstyle :omz:plugins:ssh-agent identities prod
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin:$HOME/bin
 
 export GOPATH=$HOME/code/go
 
-#fpath=(/home/ghost/zsh-completions/src $fpath)
-
-#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+fpath=(/home/ghost/zsh-completions/src $fpath)
 
 autoload -U zsh-mime-setup
 zsh-mime-setup

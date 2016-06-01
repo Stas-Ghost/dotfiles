@@ -9,28 +9,31 @@ branch = auto
 ui=true
 
 [alias]
-    st = status -sb
-    ci = commit
-    br = branch
-    co = checkout
-    di = diff --word-diff
-    plog = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cred\\ [%cn][%cD]" --decorate
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cred\\ [%cn][%cD]" --decorate --numstat
-    lsd = log --graph '--pretty=tformat:%Cred%h%Creset %Cgreen%ar%Creset %Cred%d%Creset %s %Cred%cD' --all --simplify-by-decoration
+st = status -sb
+ci = commit
+br = branch
+co = checkout
+di = diff --word-diff
+plog = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cred\\ [%cn][%cD]" --decorate
+ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cred\\ [%cn][%cD]" --decorate --numstat
+lsd = log --graph '--pretty=tformat:%Cred%h%Creset %Cgreen%ar%Creset %Cred%d%Creset %s %Cred%cD' --all --simplify-by-decoration
 
 [core]
-    editor = nano
-	whitespace = trailing-space, space-before-tab, cr-at-eol
-	autocrlf = input
+editor = nano
+whitespace = trailing-space, space-before-tab, cr-at-eol
+autocrlf = input
+
 [pull]
-#	rebase = true
+rebase = true
+
 [push]
-	default = upstream
+default = current
+
 [diff]
-    memonicprefix = true
+memonicprefix = true
+
 [branch]
-    autosetuprebase = always
+autosetuprebase = always
+
 [apply]
-    whitespace = nowarn
-[commit]
-    template = ~/.commit-template
+whitespace = nowarn
