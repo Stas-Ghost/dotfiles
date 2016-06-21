@@ -50,6 +50,7 @@ values."
    dotspacemacs-additional-packages
    '(
      key-chord
+     sr-speedbar
      ;; ob-clojure
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -76,10 +77,10 @@ values."
    ;; (default t)
    dotspacemacs-elpa-https t
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 3
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. (default t)
-   dotspacemacs-check-for-update t
+   dotspacemacs-check-for-update nil
    ;; One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
    ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
    ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
@@ -273,8 +274,6 @@ layers configuration. You are free to put any user code."
 
   (setq org-default-notes-file (concat org-directory "~/Dropbox/notes/notes.org"))
 
-  (global-set-key [f7] 'neotree-find)
-  (global-set-key [f8] 'neotree-toggle)
   ;; (setq projectile-switch-project-action 'neotree-projectile-action)
 
   ;; TRAMP remote sudo
@@ -298,10 +297,18 @@ layers configuration. You are free to put any user code."
   (customize-save-variable 'interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
   ;;  smartparens
-  ;; (require 'smartparens-config)
+  (require 'smartparens-config)
+  (smartparens-global-mode t)
+  (sp-use-smartparens-bindings)
+  (show-smartparens-global-mode t)
+  (sp-pair "(" ")" :wrap "C-(")
 
   ;;  Reloads file from disk
   (global-auto-revert-mode t)
+
+  ;;  Speedbar
+  (global-set-key [f7] 'sr-speedbar-toggle)
+  (global-set-key [f8] 'sr-speedbar-select-window)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -317,6 +324,17 @@ layers configuration. You are free to put any user code."
  '(org-confirm-babel-evaluate nil)
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode nil)
+ '(speedbar-directory-unshown-regexp "^$")
+ '(speedbar-show-unknown-files t)
+ '(speedbar-supported-extension-expressions
+   (quote
+    ("\\.\\(inc\\|php[s345]?\\|phtml\\)" ".org" ".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?" ".tex\\(i\\(nfo\\)?\\)?" ".el" ".emacs" ".l" ".lsp" ".p" ".java" ".js" ".f\\(90\\|77\\|or\\)?" ".ad[abs]" ".p[lm]" ".tcl" ".m" ".scm" ".pm" ".py" ".g" ".s?html" ".ma?k" "[Mm]akefile\\(\\.in\\)?" ".clj" ".cljs")))
+ '(speedbar-use-images nil)
+ '(sr-speedbar-auto-refresh t)
+ '(sr-speedbar-default-width 40)
+ '(sr-speedbar-delete-windows t)
+ '(sr-speedbar-max-width 50)
+ '(sr-speedbar-skip-other-window-p t)
  '(x-select-enable-clipboard t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
