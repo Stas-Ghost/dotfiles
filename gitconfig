@@ -37,3 +37,6 @@ autosetuprebase = always
 
 [apply]
 whitespace = nowarn
+
+[diff]
+compactionHeuristic = true
