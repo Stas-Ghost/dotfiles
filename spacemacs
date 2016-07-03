@@ -23,7 +23,11 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (auto-completion :disabled-for org)
+     (auto-completion :disabled-for org
+                      :variables
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-sort-by-usage t)
      better-defaults
      clojure
      emacs-lisp
@@ -37,11 +41,11 @@ values."
      syntax-checking
      version-control
      yaml
-     markdown
-     php
+     ;; php
      ansible
-     go
-     erlang
+     nim
+     ;; go
+     ;; erlang
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -289,7 +293,13 @@ layers configuration. You are free to put any user code."
   (key-chord-define-global "xx" 'helm-M-x)
   (key-chord-define-global "yy" 'helm-show-kill-ring)
   (key-chord-define-global "bb" 'helm-mini)
-  (key-chord-define-global ";;" 'spacemacs/comment-or-uncomment-lines)
+
+  (defun comment-and-goto-next (&optional arg)
+    (interactive "p")
+    (spacemacs/comment-or-uncomment-lines arg)
+    (next-line))
+
+  (key-chord-define-global ";;" 'comment-and-goto-next)
 
   ;; clipboard
   (customize-save-variable 'x-select-enable-clipboard t)
@@ -309,7 +319,16 @@ layers configuration. You are free to put any user code."
   ;;  Speedbar
   (global-set-key [f7] 'sr-speedbar-toggle)
   (global-set-key [f8] 'sr-speedbar-select-window)
-  )
+
+  ;; nim
+  (setq nim-nimsuggest-path "/usr/bin/nimsuggest")
+  (add-to-list 'company-backends
+               '(company-nim :with company-nim-builtin))
+  (add-hook 'nim-mode-hook 'company-mode)
+
+  ;; company
+  (global-company-mode)
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -333,7 +352,7 @@ layers configuration. You are free to put any user code."
  '(sr-speedbar-auto-refresh t)
  '(sr-speedbar-default-width 40)
  '(sr-speedbar-delete-windows t)
- '(sr-speedbar-max-width 50)
+ '(sr-speedbar-max-width 40)
  '(sr-speedbar-skip-other-window-p t)
  '(x-select-enable-clipboard t))
 (custom-set-faces
