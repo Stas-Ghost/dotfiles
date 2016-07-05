@@ -16,5 +16,6 @@
         path: i3/
         create: true
     ~/.i3status.conf: i3status.conf
+    ~/.config/tilda/config_0: tilda
 
 
