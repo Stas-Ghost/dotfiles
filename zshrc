@@ -1,54 +1,53 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# load zgen
+source "${HOME}/.zgen/zgen.zsh"
 
-setopt HIST_IGNORE_DUPS
+ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc ${HOME}/.zshrc.local)
+
+# if the init scipt doesn't exist
+if ! zgen saved; then
+    echo "Creating a zgen save"
+
+    zgen oh-my-zsh
+
+    # plugins
+    zgen oh-my-zsh plugins/git
+    zgen oh-my-zsh plugins/history
+    zgen oh-my-zsh plugins/debian
+    zgen oh-my-zsh plugins/colorize
+    zgen oh-my-zsh plugins/extract
+    zgen oh-my-zsh plugins/ssh-agent
+    zgen oh-my-zsh plugins/sudo
+    zgen oh-my-zsh plugins/colored-man-pages
+    zgen oh-my-zsh plugins/command-not-found
+
+    zgen load chrissicool/zsh-256color
+    zgen load zsh-users/zsh-syntax-highlighting
+    zgen load djui/alias-tips
+    zgen load zsh-users/zsh-autosuggestions
+    zgen load rimraf/k
+    zgen load rupa/z
+
+    # completions
+    zgen load zsh-users/zsh-completions src
+
+    # theme
+    zgen load Stas-Ghost/fishy-gentoo fishy-gentoo
+
+    # save all to init script
+    zgen save
+fi
 
 #zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 [ -f ~/.ssh/config ] && : ${(A)ssh_config_hosts:=${${${${(@M)${(f)"$(<~/.ssh/config)"}:#Host *}#Host }:#*\**}:#*\?*}}
 [ -f ~/.ssh/known_hosts ] && : ${(A)ssh_known_hosts:=${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*}}
 zstyle ':completion:*:hosts' hosts $ssh_config_hosts $ssh_known_hosts
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="fishy-gentoo"
-
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias aib="sudo aptitude -t jessie-backports install"
-transfer() { curl --upload-file $1 https://transfer.sh/$(basename $1); }
-alias transfer=transfer
-
-#export ALTERNATE_EDITOR=""
-#export EDITOR="emacsclient -t"                  # $EDITOR should open in terminal
-#export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI with non-daemon as alternate
-alias e='emacsclient -t'
-alias ec='emacsclient -c'
-alias vim='emacsclient -t'
-alias vi='emacsclient -t'
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=30
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to disable command auto-correction.
-# DISABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
+tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }; alias transfer=transfer
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -60,58 +59,18 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-#plugins=(git)
-
-#source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-#export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:~/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-plugins=(pass git debian history sublime lein colored-man colorize cp extract web_search rsync composer rand-quote golang zsh-completions ansible zsh-syntax-highlighting ssh-agent)
-
-source $ZSH/oh-my-zsh.sh
-
 zstyle :omz:plugins:ssh-agent identities prod
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin:$HOME/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin:$HOME/bin:$HOME/.composer/vendor/bin/
 
-export GOPATH=$HOME/code/go
-
-fpath=(/home/ghost/zsh-completions/src $fpath)
+export GOPATH=/home/ghost/.go
 
 autoload -U zsh-mime-setup
 zsh-mime-setup
-autoload -U compinit
-compinit
-
-setopt completealiases
 
 [ -e /home/ghost/notifyosd.zsh ] && . /home/ghost/notifyosd.zsh
 
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
+
