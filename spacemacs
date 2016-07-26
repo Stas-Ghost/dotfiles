@@ -23,11 +23,12 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (auto-completion :disabled-for org
-                      :variables
-                      auto-completion-enable-help-tooltip t
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-sort-by-usage t)
+     (auto-completion
+      ;; :disabled-for org
+      :variables
+      auto-completion-enable-help-tooltip t
+      auto-completion-enable-snippets-in-popup t
+      auto-completion-enable-sort-by-usage t)
      better-defaults
      clojure
      emacs-lisp
@@ -44,6 +45,7 @@ values."
      ;; php
      ansible
      nim
+     rust
      ;; go
      ;; erlang
      )
@@ -55,6 +57,7 @@ values."
    '(
      key-chord
      sr-speedbar
+     ranger
      ;; ob-clojure
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -165,9 +168,9 @@ values."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'original
+   dotspacemacs-auto-save-file-location 'cache
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
-   dotspacemacs-max-rollback-slots 10
+   dotspacemacs-max-rollback-slots 0
    ;; If non nil then `ido' replaces `helm' for some commands. For now only
    ;; `find-files' (SPC f f), `find-spacemacs-file' (SPC f e s), and
    ;; `find-contrib-file' (SPC f e c) are replaced. (default nil)
@@ -293,6 +296,29 @@ layers configuration. You are free to put any user code."
   (key-chord-define-global "xx" 'helm-M-x)
   (key-chord-define-global "yy" 'helm-show-kill-ring)
   (key-chord-define-global "bb" 'helm-mini)
+  (key-chord-define-global "qq" 'ranger)
+
+  (defun duplicate-current-line-or-region (arg)
+    "Duplicates the current line or region ARG times.
+If there's no region, the current line will be duplicated. However, if
+there's a region, all lines that region covers will be duplicated."
+    (interactive "p")
+    (let (beg end (origin (point)))
+      (if (and mark-active (> (point) (mark)))
+          (exchange-point-and-mark))
+      (setq beg (line-beginning-position))
+      (if mark-active
+          (exchange-point-and-mark))
+      (setq end (line-end-position))
+      (let ((region (buffer-substring-no-properties beg end)))
+        (dotimes (i arg)
+          (goto-char end)
+          (newline)
+          (insert region)
+          (setq end (point)))
+        (goto-char (+ origin (* (length region) arg) arg)))))
+
+  (key-chord-define-global "dd" 'duplicate-current-line-or-region)
 
   (defun comment-and-goto-next (&optional arg)
     (interactive "p")
@@ -328,6 +354,12 @@ layers configuration. You are free to put any user code."
 
   ;; company
   (global-company-mode)
+
+  ;; rust completion
+  (setq-default rust-enable-racer t)
+
+  ;; ranger
+  (setq ranger-override-dired t)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -354,6 +386,7 @@ layers configuration. You are free to put any user code."
  '(sr-speedbar-delete-windows t)
  '(sr-speedbar-max-width 40)
  '(sr-speedbar-skip-other-window-p t)
+ '(vc-follow-symlinks t)
  '(x-select-enable-clipboard t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

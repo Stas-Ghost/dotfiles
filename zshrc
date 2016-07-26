@@ -12,13 +12,18 @@ if ! zgen saved; then
     # plugins
     zgen oh-my-zsh plugins/git
     zgen oh-my-zsh plugins/history
-    zgen oh-my-zsh plugins/debian
     zgen oh-my-zsh plugins/colorize
+    zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/extract
     zgen oh-my-zsh plugins/ssh-agent
+    zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
+    zgen oh-my-zsh plugins/rust
     zgen oh-my-zsh plugins/colored-man-pages
     zgen oh-my-zsh plugins/command-not-found
+    zgen oh-my-zsh plugins/bgnotify
+    zgen oh-my-zsh plugins/pass
+#    zgen oh-my-zsh plugins/emacs
 
     zgen load chrissicool/zsh-256color
     zgen load zsh-users/zsh-syntax-highlighting
@@ -26,6 +31,7 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-autosuggestions
     zgen load rimraf/k
     zgen load rupa/z
+#    zgen load marzocchi/zsh-notify
 
     # completions
     zgen load zsh-users/zsh-completions src
@@ -47,22 +53,6 @@ zstyle ':completion:*:hosts' hosts $ssh_config_hosts $ssh_known_hosts
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
 tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }; alias transfer=transfer
-
-# Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin
-
-# Conditional PATH additions
-for path_candidate in /opt/local/sbin \
-  /opt/local/bin \
-    ~/bin \
-  ~/src/gocode/bin
-do
-  if [ -d ${path_candidate} ]; then
-    export PATH=${PATH}:${path_candidate}
-  fi
-done
-
-export GOPATH=~/.go
 
 autoload -U zsh-mime-setup
 zsh-mime-setup
@@ -103,3 +93,31 @@ zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==34=34}:${(s.:.)LS_COLORS}")';
+
+export EDITOR="$(if [[ -n $DISPLAY ]]; then echo 'emacsclient -c'; else echo 'emacsclient -t'; fi)"
+export VISUAL="emacsclient -c"
+
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
+alias emacs='emacsclient -c'
+alias vim='emacsclient -t'
+alias vi='emacsclient -t'
+
+# Customize to your needs...
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin
+
+# Conditional PATH additions
+for path_candidate in /opt/local/sbin \
+       /opt/local/bin \
+         ~/bin \
+       ~/src/gocode/bin
+do
+  if [ -d ${path_candidate} ]; then
+        export PATH=${PATH}:${path_candidate}
+  fi
+done
+
+export GOPATH=~/.go
+export RUST_SRC_PATH=/home/ghost/code/rust/rust/src
+
+stty icrnl
