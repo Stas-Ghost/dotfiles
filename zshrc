@@ -12,7 +12,7 @@ if ! zgen saved; then
     # plugins
     zgen oh-my-zsh plugins/git
     zgen oh-my-zsh plugins/history
-    zgen oh-my-zsh plugins/colorize
+#    zgen oh-my-zsh plugins/colorize
     zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/extract
     zgen oh-my-zsh plugins/ssh-agent
@@ -26,7 +26,7 @@ if ! zgen saved; then
 #    zgen oh-my-zsh plugins/emacs
 
     zgen load chrissicool/zsh-256color
-    zgen load zsh-users/zsh-syntax-highlighting
+#    zgen load zsh-users/zsh-syntax-highlighting
     zgen load djui/alias-tips
     zgen load zsh-users/zsh-autosuggestions
     zgen load rimraf/k
@@ -109,7 +109,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin
 # Conditional PATH additions
 for path_candidate in /opt/local/sbin \
        /opt/local/bin \
-         ~/bin \
+       ~/bin \
        ~/src/gocode/bin
 do
   if [ -d ${path_candidate} ]; then
