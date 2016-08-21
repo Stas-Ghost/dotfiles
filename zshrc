@@ -94,14 +94,17 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==34=34}:${(s.:.)LS_COLORS}")';
 
-export EDITOR="$(if [[ -n $DISPLAY ]]; then echo 'emacsclient -c'; else echo 'emacsclient -t'; fi)"
+# export EDITOR="$(if [[ -n $DISPLAY ]]; then echo 'emacsclient -c'; else echo 'emacsclient -t'; fi)"
+export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c"
 
 alias e='emacsclient -t'
+alias emacs=e
+alias vim=e
+alias vi=e
+
 alias ec='emacsclient -c'
-alias emacs='emacsclient -c'
-alias vim='emacsclient -t'
-alias vi='emacsclient -t'
+alias eemacs=ec
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin
@@ -121,3 +124,6 @@ export GOPATH=~/.go
 export RUST_SRC_PATH=/home/ghost/code/rust/rust/src
 
 stty icrnl
+
+export ANSIBLE_INVENTORY=~/code/ansible/hosts
+export ANSIBLE_HOST_CHECKING=False
