@@ -58,6 +58,8 @@ values."
      key-chord
      sr-speedbar
      ranger
+     aggressive-indent
+     helm-cider
      ;; ob-clojure
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -275,11 +277,17 @@ layers configuration. You are free to put any user code."
    'org-babel-load-languages
    '((clojure . t)
      (emacs-lisp . t)
+     (sh . t)
      ))
   (setq org-babel-clojure-backend 'cider)
   (customize-save-variable 'org-confirm-babel-evaluate nil)
 
-  (setq org-default-notes-file (concat org-directory "~/Dropbox/notes/notes.org"))
+  (setq org-default-notes-file "~/Dropbox/notes/everyday.org")
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file "~/Dropbox/notes/everyday.org")
+           "** TODO %?\n  %i\n  %a")
+          ("j" "Journal" entry (file "~/Dropbox/notes/everyday.org")
+           "** %?\nEntered on %U\n  %i\n  %a")))
 
   ;; (setq projectile-switch-project-action 'neotree-projectile-action)
 
@@ -360,7 +368,12 @@ there's a region, all lines that region covers will be duplicated."
 
   ;; ranger
   (setq ranger-override-dired t)
-)
+
+  ;; aggresive ident mode
+  (global-aggressive-indent-mode 1)
+
+  (helm-cider-mode 1)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -370,11 +383,26 @@ there's a region, all lines that region covers will be duplicated."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cider-apropos-actions
+   (quote
+    (("find-def" . cider--find-var)
+     ("lookup-on-grimoire" . cider-grimoire-lookup))))
+ '(helm-cider-apropos-actions
+   (quote
+    (("Find definition" lambda
+      (candidate)
+      (cider-find-var nil candidate))
+     ("Find on Grimoire" . cider-grimoire-lookup))))
  '(interprogram-paste-function (quote x-cut-buffer-or-selection-value) t)
  '(org-agenda-files (quote ("~/Dropbox/notes/everyday.org")))
  '(org-confirm-babel-evaluate nil)
+ '(org-support-shift-select t)
+ '(package-selected-packages
+   (quote
+    (helm-cider evil-unimpaired uuidgen org-projectile org-download mwim link-hint jinja2-mode git-link eyebrowse evil-visual-mark-mode cider clojure-mode f iedit smartparens undo-tree flycheck helm-core markdown-mode s magit git-commit with-editor hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag helm yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toml-mode toc-org sr-speedbar spacemacs-theme spaceline smooth-scrolling smeargle shell-pop restart-emacs ranger rainbow-delimiters racer quelpa projectile popwin persp-mode pcre2el parent-mode paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file nim-mode neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme key-chord info+ indent-guide ido-vertical-mode hungry-delete htmlize helm-themes google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-rust flycheck-pos-tip flycheck-nim flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eshell-prompt-extras esh-help elisp-slime-nav diff-hl define-word company-statistics company-racer company-quickhelp clj-refactor clean-aindent-mode cider-eval-sexp-fu buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile ansible-doc ansible aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode nil)
+ '(select-enable-clipboard t)
  '(speedbar-directory-unshown-regexp "^$")
  '(speedbar-show-unknown-files t)
  '(speedbar-supported-extension-expressions
