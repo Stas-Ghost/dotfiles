@@ -18,13 +18,15 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     html
+     php
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      (auto-completion
-      ;; :disabled-for org
+      :disabled-for org
       :variables
       auto-completion-enable-help-tooltip t
       auto-completion-enable-snippets-in-popup t
@@ -34,7 +36,8 @@ values."
      emacs-lisp
      git
      markdown
-     org
+     (org :variables
+          org-enable-reveal-js-support t)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -60,6 +63,7 @@ values."
      ranger
      aggressive-indent
      helm-cider
+     visual-regexp
      ;; ob-clojure
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -128,7 +132,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 20
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -373,6 +377,9 @@ there's a region, all lines that region covers will be duplicated."
   (global-aggressive-indent-mode 1)
 
   (helm-cider-mode 1)
+
+  (define-key global-map (kbd "C-c r") 'vr/replace)
+  (define-key global-map (kbd "C-c q") 'vr/query-replace)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -399,7 +406,7 @@ there's a region, all lines that region covers will be duplicated."
  '(org-support-shift-select t)
  '(package-selected-packages
    (quote
-    (helm-cider evil-unimpaired uuidgen org-projectile org-download mwim link-hint jinja2-mode git-link eyebrowse evil-visual-mark-mode cider clojure-mode f iedit smartparens undo-tree flycheck helm-core markdown-mode s magit git-commit with-editor hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag helm yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toml-mode toc-org sr-speedbar spacemacs-theme spaceline smooth-scrolling smeargle shell-pop restart-emacs ranger rainbow-delimiters racer quelpa projectile popwin persp-mode pcre2el parent-mode paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file nim-mode neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme key-chord info+ indent-guide ido-vertical-mode hungry-delete htmlize helm-themes google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-rust flycheck-pos-tip flycheck-nim flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eshell-prompt-extras esh-help elisp-slime-nav diff-hl define-word company-statistics company-racer company-quickhelp clj-refactor clean-aindent-mode cider-eval-sexp-fu buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile ansible-doc ansible aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (visual-regexp eshell-z bind-map web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ox-reveal hydra edn paredit peg queue highlight magit-popup powerline company org pcache dumb-jump column-enforce-mode clojure-snippets cargo rust-mode auto-complete inflections multiple-cursors anzu git-gutter seq async yasnippet dash phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode helm-cider evil-unimpaired uuidgen org-projectile org-download mwim link-hint jinja2-mode git-link eyebrowse evil-visual-mark-mode cider clojure-mode f iedit smartparens undo-tree flycheck helm-core markdown-mode s magit git-commit with-editor hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag helm yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toml-mode toc-org sr-speedbar spacemacs-theme spaceline smooth-scrolling smeargle shell-pop restart-emacs ranger rainbow-delimiters racer quelpa projectile popwin persp-mode pcre2el parent-mode paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file nim-mode neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme key-chord info+ indent-guide ido-vertical-mode hungry-delete htmlize helm-themes google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-rust flycheck-pos-tip flycheck-nim flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eshell-prompt-extras esh-help elisp-slime-nav diff-hl define-word company-statistics company-racer company-quickhelp clj-refactor clean-aindent-mode cider-eval-sexp-fu buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile ansible-doc ansible aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode nil)
  '(select-enable-clipboard t)
