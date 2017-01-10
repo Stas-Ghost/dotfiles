@@ -1,3 +1,5 @@
+#zmodload zsh/zprof
+
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
 
@@ -23,7 +25,6 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/command-not-found
     zgen oh-my-zsh plugins/bgnotify
     zgen oh-my-zsh plugins/pass
-#    zgen oh-my-zsh plugins/emacs
 
     zgen load chrissicool/zsh-256color
 #    zgen load zsh-users/zsh-syntax-highlighting
@@ -31,7 +32,6 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-autosuggestions
     zgen load rimraf/k
     zgen load rupa/z
-#    zgen load marzocchi/zsh-notify
 
     # completions
     zgen load zsh-users/zsh-completions src
@@ -54,8 +54,9 @@ zstyle ':completion:*:hosts' hosts $ssh_config_hosts $ssh_known_hosts
 transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
 tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }; alias transfer=transfer
 
-autoload -U zsh-mime-setup
-zsh-mime-setup
+# Too long
+#autoload -U zsh-mime-setup
+#zsh-mime-setup
 
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
@@ -95,10 +96,10 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==34=34}:${(s.:.)LS_COLORS}")';
 
 # export EDITOR="$(if [[ -n $DISPLAY ]]; then echo 'emacsclient -c'; else echo 'emacsclient -t'; fi)"
-export EDITOR="emacsclient -t"
-export VISUAL="emacsclient -c"
+export EDITOR='emacsclient -t --alternate-editor nano'
+export VISUAL='emacsclient -t --alternate-editor nano'
 
-alias e='emacsclient -t'
+alias e='emacsclient -t --alternate-editor nano'
 alias emacs=e
 alias vim=e
 alias vi=e
@@ -127,3 +128,5 @@ stty icrnl
 
 export ANSIBLE_INVENTORY=~/code/ansible/hosts
 export ANSIBLE_HOST_CHECKING=False
+
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
