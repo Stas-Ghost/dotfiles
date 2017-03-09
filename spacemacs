@@ -18,8 +18,13 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     javascript
      html
      php
+     (scala :variables
+            scala-auto-start-ensime t
+            scala-enable-eldoc t
+            )
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -264,6 +269,9 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
+
+  (push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
+  (push '("ensime" . "melpa-stable") package-pinned-packages)
   )
 
 (defun dotspacemacs/user-config ()
@@ -380,6 +388,7 @@ there's a region, all lines that region covers will be duplicated."
 
   ;; aggresive ident mode
   (global-aggressive-indent-mode 1)
+  (add-to-list 'aggressive-indent-excluded-modes 'scala-mode)
 
   (helm-cider-mode 1)
 
@@ -401,54 +410,53 @@ there's a region, all lines that region covers will be duplicated."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(cider-apropos-actions
-   (quote
-    (("find-def" . cider--find-var)
-     ("lookup-on-grimoire" . cider-grimoire-lookup))))
- '(company-global-modes (quote (not org org-mode)))
- '(evil-want-Y-yank-to-eol t)
- '(helm-cider-apropos-actions
-   (quote
-    (("Find definition" lambda
-      (candidate)
-      (cider-find-var nil candidate))
-     ("Find on Grimoire" . cider-grimoire-lookup))))
- '(interprogram-paste-function (quote x-cut-buffer-or-selection-value) t)
- '(org-agenda-files
-   (quote
-    ("~/Dropbox/notes/2017.org" "~/Dropbox/notes/everyday.org")))
- '(org-confirm-babel-evaluate nil)
- '(org-support-shift-select t)
- '(package-selected-packages
-   (quote
-    (swift-mode flycheck-pony pony-snippets ponylang-mode winum hide-comnt alert elfeed-web elfeed-org elfeed-goodies ace-jump-mode noflet zeal-at-point xkcd twittering-mode helm-dash simple-httpd elfeed deft stickyfunc-enhance srefactor smex ibuffer-projectile visual-regexp eshell-z bind-map web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ox-reveal hydra edn paredit peg queue highlight magit-popup powerline company org pcache dumb-jump column-enforce-mode clojure-snippets cargo rust-mode auto-complete inflections multiple-cursors anzu git-gutter seq async yasnippet dash phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode helm-cider evil-unimpaired uuidgen org-projectile org-download mwim link-hint jinja2-mode git-link eyebrowse evil-visual-mark-mode cider clojure-mode f iedit smartparens undo-tree flycheck helm-core markdown-mode s magit git-commit with-editor hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag helm yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toml-mode toc-org sr-speedbar spacemacs-theme spaceline smooth-scrolling smeargle shell-pop restart-emacs ranger rainbow-delimiters racer quelpa projectile popwin persp-mode pcre2el parent-mode paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file nim-mode neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme key-chord info+ indent-guide ido-vertical-mode hungry-delete htmlize helm-themes google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-rust flycheck-pos-tip flycheck-nim flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eshell-prompt-extras esh-help elisp-slime-nav diff-hl define-word company-statistics company-racer company-quickhelp clj-refactor clean-aindent-mode cider-eval-sexp-fu buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile ansible-doc ansible aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
- '(save-interprogram-paste-before-kill t)
- '(scroll-bar-mode nil)
- '(select-enable-clipboard t)
- '(spaceline-show-default-input-method t)
- '(speedbar-directory-unshown-regexp "^$")
- '(speedbar-show-unknown-files t)
- '(speedbar-supported-extension-expressions
-   (quote
-    ("\\.\\(inc\\|php[s345]?\\|phtml\\)" ".org" ".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?" ".tex\\(i\\(nfo\\)?\\)?" ".el" ".emacs" ".l" ".lsp" ".p" ".java" ".js" ".f\\(90\\|77\\|or\\)?" ".ad[abs]" ".p[lm]" ".tcl" ".m" ".scm" ".pm" ".py" ".g" ".s?html" ".ma?k" "[Mm]akefile\\(\\.in\\)?" ".clj" ".cljs")))
- '(speedbar-use-images nil)
- '(sr-speedbar-auto-refresh t)
- '(sr-speedbar-default-width 40)
- '(sr-speedbar-delete-windows t)
- '(sr-speedbar-max-width 40)
- '(sr-speedbar-skip-other-window-p t)
- '(vc-follow-symlinks t)
- '(x-select-enable-clipboard t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(cider-apropos-actions
+     (quote
+      (("find-def" . cider--find-var)
+       ("lookup-on-grimoire" . cider-grimoire-lookup))))
+   '(company-global-modes (quote (not org org-mode)))
+   '(evil-want-Y-yank-to-eol t)
+   '(helm-cider-apropos-actions
+     (quote
+      (("Find definition" lambda
+        (candidate)
+        (cider-find-var nil candidate))
+       ("Find on Grimoire" . cider-grimoire-lookup))))
+   '(interprogram-paste-function (quote x-cut-buffer-or-selection-value) t)
+   '(org-agenda-files
+     (quote
+      ("~/Dropbox/notes/2017.org" "~/Dropbox/notes/everyday.org")))
+   '(org-confirm-babel-evaluate nil)
+   '(org-support-shift-select t)
+   '(package-selected-packages
+     (quote
+      (zenburn-theme unfill solarized-theme monokai-theme window-purpose imenu-list fuzzy company-ansible helm-purpose swift-mode flycheck-pony pony-snippets ponylang-mode winum hide-comnt alert elfeed-web elfeed-org elfeed-goodies ace-jump-mode noflet zeal-at-point xkcd twittering-mode helm-dash simple-httpd elfeed deft stickyfunc-enhance srefactor smex ibuffer-projectile visual-regexp eshell-z bind-map web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ox-reveal hydra edn paredit peg queue highlight magit-popup powerline company org pcache dumb-jump column-enforce-mode clojure-snippets cargo rust-mode auto-complete inflections multiple-cursors anzu git-gutter seq async yasnippet dash phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode helm-cider evil-unimpaired uuidgen org-projectile org-download mwim link-hint jinja2-mode git-link eyebrowse evil-visual-mark-mode cider clojure-mode f iedit smartparens undo-tree flycheck helm-core markdown-mode s magit git-commit with-editor hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag helm yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toml-mode toc-org sr-speedbar spacemacs-theme spaceline smooth-scrolling smeargle shell-pop restart-emacs ranger rainbow-delimiters racer quelpa projectile popwin persp-mode pcre2el parent-mode paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file nim-mode neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme key-chord info+ indent-guide ido-vertical-mode hungry-delete htmlize helm-themes google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-rust flycheck-pos-tip flycheck-nim flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eshell-prompt-extras esh-help elisp-slime-nav diff-hl define-word company-statistics company-racer company-quickhelp clj-refactor clean-aindent-mode cider-eval-sexp-fu buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile ansible-doc ansible aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+   '(save-interprogram-paste-before-kill t)
+   '(scroll-bar-mode nil)
+   '(select-enable-clipboard t)
+   '(spaceline-show-default-input-method t)
+   '(speedbar-directory-unshown-regexp "^$")
+   '(speedbar-show-unknown-files t)
+   '(speedbar-supported-extension-expressions
+     (quote
+      ("\\.\\(inc\\|php[s345]?\\|phtml\\)" ".org" ".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?" ".tex\\(i\\(nfo\\)?\\)?" ".el" ".emacs" ".l" ".lsp" ".p" ".java" ".js" ".f\\(90\\|77\\|or\\)?" ".ad[abs]" ".p[lm]" ".tcl" ".m" ".scm" ".pm" ".py" ".g" ".s?html" ".ma?k" "[Mm]akefile\\(\\.in\\)?" ".clj" ".cljs")))
+   '(speedbar-use-images nil)
+   '(sr-speedbar-auto-refresh t)
+   '(sr-speedbar-default-width 40)
+   '(sr-speedbar-delete-windows t)
+   '(sr-speedbar-max-width 40)
+   '(sr-speedbar-skip-other-window-p t)
+   '(vc-follow-symlinks t))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+   '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+  )
