@@ -20,6 +20,9 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/ssh-agent
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
+    zgen oh-my-zsh plugins/sbt
+    zgen oh-my-zsh plugins/scala
+    zgen oh-my-zsh plugins/lein
     zgen oh-my-zsh plugins/rust
     zgen oh-my-zsh plugins/colored-man-pages
     zgen oh-my-zsh plugins/command-not-found
@@ -54,7 +57,8 @@ zstyle ':completion:*:hosts' hosts $ssh_config_hosts $ssh_known_hosts
 transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
 tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }; alias transfer=transfer
 
-# Too long
+
+
 #autoload -U zsh-mime-setup
 #zsh-mime-setup
 
@@ -128,5 +132,8 @@ stty icrnl
 
 export ANSIBLE_INVENTORY=~/code/ansible/hosts
 export ANSIBLE_HOST_CHECKING=False
+export ANSIBLE_HOST_KEY_CHECKING=False
 
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+export SYSTEMD_LESS=FRXMK journalctl
