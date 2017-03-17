@@ -3,7 +3,7 @@
 temp-day=5600
 temp-night=3500
 transition=1
-brightness=0.8
+brightness=0.9
 ;brightness-day=1
 ;brightness-night=0.6
 
@@ -15,8 +15,8 @@ adjustment-method=vidmode
 ; The location provider and adjustment method settings
 ; are in their own sections.
 [manual]
-lat=43.1
-lon=76.5
+lat=50.4
+lon=30.5
 
 ; In this example screen 1 is adjusted by vidmode. Note
 ; that the numbering starts from 0, so this is actually
