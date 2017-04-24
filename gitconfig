@@ -1,12 +1,13 @@
 [user]
 name = Stanislav Yakushev
 email = stas.ghost@gmail.com
+signingkey = 262A6A5EC617CB3E
 
 [color]
 diff   = auto
 status = auto
 branch = auto
-ui=true
+ui     = true
 
 [alias]
 st = status -sb
@@ -17,6 +18,8 @@ di = diff --word-diff
 plog = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cred\\ [%cn][%cD]" --decorate
 ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cred\\ [%cn][%cD]" --decorate --numstat
 lsd = log --graph '--pretty=tformat:%Cred%h%Creset %Cgreen%ar%Creset %Cred%d%Creset %s %Cred%cD' --all --simplify-by-decoration
+prune = fetch --prune
+undo = reset --soft HEAD^
 
 [core]
 editor = nano
@@ -27,7 +30,9 @@ autocrlf = input
 rebase = true
 
 [push]
-default = current
+# before was current
+default = simple
+follwTags = true
 
 [diff]
 memonicprefix = true
@@ -40,3 +45,12 @@ whitespace = nowarn
 
 [diff]
 compactionHeuristic = true
+
+[commit]
+gpgSign = true
+
+[status]
+showUntrackedFiles = all
+
+[transfer]
+fsckobjects = true
