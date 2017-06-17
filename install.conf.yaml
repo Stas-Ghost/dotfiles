@@ -3,9 +3,10 @@
 - link:
     ~/.gitconfig: gitconfig
     ~/.tmux.conf: tmux.conf
-    ~/.zshenv: zshenv
     ~/.zshrc: zshrc
+    ~/.zshenv: zshenv
     ~/.spacemacs: spacemacs
+    ~/.wgetrc: wgetrc
     ~/.config/redshift.conf: redshift
     ~/.config/youtube-dl.conf: youtube-dl
     ~/notifyosd.zsh: notifyosd.zsh
@@ -17,5 +18,3 @@
         create: true
     ~/.i3status.conf: i3status.conf
     ~/.config/tilda/config_0: tilda
-
-
