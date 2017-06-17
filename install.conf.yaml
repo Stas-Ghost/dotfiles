@@ -9,7 +9,6 @@
     ~/.wgetrc: wgetrc
     ~/.config/redshift.conf: redshift
     ~/.config/youtube-dl.conf: youtube-dl
-    ~/notifyosd.zsh: notifyosd.zsh
     ~/bin:
         path: bin/
         create: true
