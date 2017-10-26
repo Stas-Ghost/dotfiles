@@ -210,5 +210,6 @@ exec setxkbmap -layout us,ru -option "grp:caps_toggle,grp_led:scroll"
 # exec redshift
 # exec $psst skype
 # exec $psst viber
-exec $psst find ~/.mozilla/firefox/ -name "*.sqlite" -exec sqlite3 {} "VACUUM;REINDEX" \; ; firefox-beta
+exec $psst find ~/.mozilla/firefox/ -name "*.sqlite" -exec sqlite3 {} "VACUUM;REINDEX" \; ; firefox
 # exec sh space.sh
+exec $psst safeeyes
