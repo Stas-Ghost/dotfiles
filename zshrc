@@ -16,14 +16,17 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/history
 #    zgen oh-my-zsh plugins/colorize
     zgen oh-my-zsh plugins/common-aliases
+    zgen oh-my-zsh plugins/docker
+    zgen oh-my-zsh plugins/docker-compose
     zgen oh-my-zsh plugins/extract
     zgen oh-my-zsh plugins/ssh-agent
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/sbt
-    zgen oh-my-zsh plugins/scala
+    zgen oh-my-zsh plugins/kubectl
+    # zgen oh-my-zsh plugins/sbt
+    # zgen oh-my-zsh plugins/scala
     zgen oh-my-zsh plugins/lein
-    zgen oh-my-zsh plugins/rust
+    # zgen oh-my-zsh plugins/rust
     zgen oh-my-zsh plugins/colored-man-pages
     zgen oh-my-zsh plugins/command-not-found
     zgen oh-my-zsh plugins/bgnotify
@@ -38,6 +41,7 @@ if ! zgen saved; then
 
     # completions
     zgen load zsh-users/zsh-completions src
+    zgen load zchee/go-zsh-completions src
 
     # theme
     zgen load Stas-Ghost/fishy-gentoo fishy-gentoo
@@ -56,7 +60,6 @@ zstyle ':completion:*:hosts' hosts $ssh_config_hosts $ssh_known_hosts
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
 tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }; alias transfer=transfer
-
 
 
 #autoload -U zsh-mime-setup
@@ -111,6 +114,9 @@ alias vi=e
 alias ec='emacsclient -c'
 alias eemacs=ec
 
+alias open='xdg-open &>/dev/null'
+alias o=open
+
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin
 
@@ -137,3 +143,8 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 export SYSTEMD_LESS=FRXMK journalctl
+
+# OPAM configuration
+# . /home/ghost/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+unset zle_bracketed_paste
