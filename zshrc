@@ -1,4 +1,4 @@
-#zmodload zsh/zprof
+# zmodload zsh/zprof
 
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
@@ -12,8 +12,9 @@ if ! zgen saved; then
     zgen oh-my-zsh
 
     # plugins
-    zgen oh-my-zsh plugins/git
+#    zgen oh-my-zsh plugins/git
     zgen oh-my-zsh plugins/history
+    zgen oh-my-zsh plugins/aws
 #    zgen oh-my-zsh plugins/colorize
     zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/docker
@@ -23,6 +24,7 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/kubectl
+    zgen oh-my-zsh plugins/helm
     # zgen oh-my-zsh plugins/sbt
     # zgen oh-my-zsh plugins/scala
     zgen oh-my-zsh plugins/lein
@@ -33,15 +35,19 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/pass
 
     zgen load chrissicool/zsh-256color
-#    zgen load zsh-users/zsh-syntax-highlighting
-    zgen load djui/alias-tips
+    # zgen load zsh-users/zsh-syntax-highlighting
+    # zgen load djui/alias-tips
     zgen load zsh-users/zsh-autosuggestions
-    zgen load rimraf/k
+    # zgen load rimraf/k
     zgen load rupa/z
 
     # completions
     zgen load zsh-users/zsh-completions src
     zgen load zchee/go-zsh-completions src
+
+    # kubectx
+    # zgen load ahmetb/kubectx completion/kubectx.zsh
+    # zgen load ahmetb/kubectx completion/kubens.zsh
 
     # theme
     zgen load Stas-Ghost/fishy-gentoo fishy-gentoo
@@ -61,7 +67,6 @@ zstyle ':completion:*:hosts' hosts $ssh_config_hosts $ssh_known_hosts
 transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
 tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }; alias transfer=transfer
 
-
 #autoload -U zsh-mime-setup
 #zsh-mime-setup
 
@@ -69,7 +74,7 @@ bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 
 # Correct spelling for commands
-#setopt correct
+setopt correct
 
 # turn off the infernal correctall for filenames
 unsetopt correctall
@@ -148,3 +153,26 @@ export SYSTEMD_LESS=FRXMK journalctl
 # . /home/ghost/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 unset zle_bracketed_paste
+
+ # export NVM_DIR="$HOME/.nvm"
+ # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+ # source /usr/share/nvm/init-nvm.sh
+
+source "/usr/share/fzf/key-bindings.zsh"
+source "/usr/share/fzf/completion.zsh"
+
+#export FZF_DEFAULT_OPTS='--bind tab:down --cycle'
+export FZF_DEFAULT_OPTS='--no-reverse'
+export FZF_CTRL_R_OPTS='--sort' # --exact
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+
+# zle     -N   fzf-history-widget
+# bindkey '^[[C' fzf-history-widget
+# bindkey '^P' up-line-or-history
+# bindkey '^N' down-line-or-history
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
