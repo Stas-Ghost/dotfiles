@@ -11,3 +11,6 @@ emacs:
 	cd ~/.emacs.d && git stash && git pull && git stash pop
 	/usr/bin/emacs -nw --eval "(funcall (lambda () (configuration-layer/update-packages t) (kill-emacs)))"
 	systemctl restart --user emacs.service
+
+docker-clean:
+	docker image prune --all -f --filter until=90h && yes | docker system prune
