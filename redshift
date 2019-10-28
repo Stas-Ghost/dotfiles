@@ -10,7 +10,7 @@ brightness-night=1
 gamma=1:1:1
 
 location-provider=manual
-adjustment-method=vidmode
+;adjustment-method=vidmode
 
 ; The location provider and adjustment method settings
 ; are in their own sections.
@@ -21,6 +21,9 @@ adjustment-method=vidmode
 ;kz
 lat=43.1
 lon=76.5
+;thai
+;lat=13.7
+;lon=100.5
 
 ; In this example screen 1 is adjusted by vidmode. Note
 ; that the numbering starts from 0, so this is actually
