@@ -1,0 +1,13 @@
+#!/bin/bash
+intern=eDP1
+extern=DP2
+
+xrandr --auto
+
+if xrandr | grep "$extern disconnected"; then
+    echo "Xft.dpi: 96" | xrdb -merge
+    xrandr --output "$extern" --off --output "$intern" --auto
+else
+    echo "Xft.dpi: 144" | xrdb -merge
+    xrandr --output "$intern" --off --output "$extern" --auto --dpi 144
+fi

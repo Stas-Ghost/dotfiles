@@ -7,12 +7,8 @@
     ~/.wgetrc: wgetrc
     ~/.config/redshift.conf: redshift
     ~/.config/youtube-dl.conf: youtube-dl
-    ~/bin:
-        path: bin/
-        create: true
-    ~/.i3:
-        path: i3/
-        create: true
+    ~/.config/i3/config: i3.config
     ~/.i3status.conf: i3status.conf
     ~/.config/tilda/config_0: tilda
     ~/.ctags: ctags
+    ~/.emacs.d/personal/custom.el: custom.el

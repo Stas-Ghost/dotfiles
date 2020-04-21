@@ -1,11 +1,11 @@
 ; Global settings
 [redshift]
-temp-day=5300
-temp-night=3500
+temp-day=5800
+temp-night=3900
 transition=1
-brightness=1
-brightness-day=1
-brightness-night=1
+;brightness=0.9
+;brightness-day=0.9
+;brightness-night=0.8
 
 gamma=1:1:1
 
@@ -16,11 +16,11 @@ location-provider=manual
 ; are in their own sections.
 [manual]
 ;ua
-;lat=50.4
-;lon=30.5
+lat=50.4
+lon=30.5
 ;kz
-lat=43.1
-lon=76.5
+;lat=43.1
+;lon=76.5
 ;thai
 ;lat=13.7
 ;lon=100.5
@@ -29,4 +29,4 @@ lon=76.5
 ; that the numbering starts from 0, so this is actually
 ; the second screen.
 [vidmode]
-screen=0
+; screen=1

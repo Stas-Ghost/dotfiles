@@ -1,7 +1,7 @@
 # zmodload zsh/zprof
 
 # load zgen
-source "${HOME}/.zgen/zgen.zsh"
+source "/usr/share/zsh/share/zgen.zsh"
 
 ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc ${HOME}/.zshrc.local)
 
@@ -24,11 +24,9 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/mosh
     zgen oh-my-zsh plugins/sudo
     zgen oh-my-zsh plugins/kubectl
+    zgen oh-my-zsh plugins/kubectx
     zgen oh-my-zsh plugins/helm
-    # zgen oh-my-zsh plugins/sbt
-    # zgen oh-my-zsh plugins/scala
     zgen oh-my-zsh plugins/lein
-    # zgen oh-my-zsh plugins/rust
     zgen oh-my-zsh plugins/colored-man-pages
     zgen oh-my-zsh plugins/command-not-found
     zgen oh-my-zsh plugins/bgnotify
@@ -36,7 +34,7 @@ if ! zgen saved; then
 
     zgen load chrissicool/zsh-256color
     # zgen load zsh-users/zsh-syntax-highlighting
-    # zgen load djui/alias-tips
+    zgen load djui/alias-tips
     zgen load zsh-users/zsh-autosuggestions
     # zgen load rimraf/k
     zgen load rupa/z
@@ -176,3 +174,5 @@ bindkey '^[[B' history-beginning-search-forward
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+export QT_SCALE_FACTOR=1.5
