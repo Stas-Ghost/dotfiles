@@ -38,6 +38,7 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-autosuggestions
     # zgen load rimraf/k
     zgen load rupa/z
+    zgen load Aloxaf/fzf-tab
 
     # completions
     zgen load zsh-users/zsh-completions src
@@ -106,10 +107,10 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==34=34}:${(s.:.)LS_COLORS}")';
 
 # export EDITOR="$(if [[ -n $DISPLAY ]]; then echo 'emacsclient -c'; else echo 'emacsclient -t'; fi)"
-export EDITOR='emacsclient -t --alternate-editor nano'
-export VISUAL='emacsclient -t --alternate-editor nano'
+export EDITOR='emacsclient -t --alternate-editor mg'
+export VISUAL='emacsclient -t --alternate-editor mg'
 
-alias e='emacsclient -t --alternate-editor nano'
+alias e='emacsclient -t --alternate-editor mg'
 alias emacs=e
 alias vim=e
 alias vi=e
@@ -120,6 +121,8 @@ alias eemacs=ec
 alias open='xdg-open &>/dev/null'
 alias o=open
 
+alias suspend='systemctl suspend'
+
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin
 
@@ -127,7 +130,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin
 for path_candidate in /opt/local/sbin \
        /opt/local/bin \
        ~/bin \
-       ~/src/gocode/bin
+       ~/.go/bin
 do
   if [ -d ${path_candidate} ]; then
         export PATH=${PATH}:${path_candidate}
@@ -175,4 +178,4 @@ bindkey '^[[B' history-beginning-search-forward
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export QT_SCALE_FACTOR=1.5
+# export QT_SCALE_FACTOR=1

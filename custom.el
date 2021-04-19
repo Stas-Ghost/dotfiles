@@ -49,10 +49,10 @@
  '(org-startup-folded nil)
  '(org-startup-truncated nil)
  '(package-selected-packages
-   '(company-tern tern eglot indium helm-ag gotest parseedn pos-tip flycheck-julia julia-repl julia-mode window-number flyspell-correct-popup go-rename bm rust-mode helm-bm f flyspell-correct transient lsp-mode parseclj rich-minority exec-path-from-shell helm-descbinds helm-projectile go-complete php-mode zprint-mode simpleclip lsp-ui company-lsp async ht counsel-dash backward-forward go-guru magit-popup go-projectile hl-todo avy cider clojure-mode ghub git-commit helm helm-core sesman scss-mode rjsx-mode company-go go-mode deadgrep ansible-doc ansible company-ansible with-editor yaml-mode dockerfile-mode clj-refactor cider-spy helm-swoop company-quickhelp indicators gtk-pomodoro-indicator counsel-etags csv-mode pkgbuild-mode company-terraform terraform-mode key-chord flycheck-joker reverse-im window-numbering shell-pop markdown-mode helm-dash solarized-theme solarized groovy-mode xclip prettier-js visual-regexp helm-cider aggressive-indent ranger geiser json-mode js2-mode rainbow-mode elisp-slime-nav rainbow-delimiters company counsel swiper ivy zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))
+   '(flycheck-clj-kondo olivetti company-tern tern eglot indium helm-ag gotest parseedn pos-tip flycheck-julia julia-repl julia-mode window-number flyspell-correct-popup go-rename bm rust-mode helm-bm f flyspell-correct transient lsp-mode parseclj rich-minority exec-path-from-shell helm-descbinds helm-projectile go-complete php-mode zprint-mode simpleclip lsp-ui company-lsp async ht counsel-dash backward-forward go-guru magit-popup go-projectile hl-todo avy cider clojure-mode ghub git-commit helm helm-core sesman scss-mode rjsx-mode company-go go-mode deadgrep ansible-doc ansible company-ansible with-editor yaml-mode dockerfile-mode clj-refactor cider-spy helm-swoop company-quickhelp indicators gtk-pomodoro-indicator counsel-etags csv-mode pkgbuild-mode company-terraform terraform-mode key-chord flycheck-joker reverse-im window-numbering shell-pop markdown-mode helm-dash solarized-theme solarized groovy-mode xclip prettier-js visual-regexp helm-cider aggressive-indent ranger geiser json-mode js2-mode rainbow-mode elisp-slime-nav rainbow-delimiters company counsel swiper ivy zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(projectile-mode-line '(:eval (format " <%s>" (projectile-project-name))))
- '(ranger-cleanup-eagerly t)
+ '(ranger-cleanup-eagerly t t)
  '(ranger-max-tabs 3)
  '(save-interprogram-paste-before-kill t)
  '(select-enable-clipboard t)
@@ -117,6 +117,7 @@
                             ;; company-terraform
                             terraform-mode
                             indicators
+                            olivetti
                             ;; clj-refactor
                             ;; cider-spy
                             company-quickhelp
@@ -130,6 +131,7 @@
                             rjsx-mode
                             tern
                             company-tern
+                            flycheck-clj-kondo
                             ))
 (window-numbering-mode)
 
@@ -150,11 +152,11 @@
 (setq org-babel-clojure-backend 'cider)
 (customize-save-variable 'org-confirm-babel-evaluate nil)
 
-(setq org-default-notes-file "~/Dropbox/notes/2020.org")
+(setq org-default-notes-file "~/Dropbox/notes/2021.org")
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+datetree "~/Dropbox/notes/2020.org")
+      '(("t" "Todo" entry (file+datetree "~/Dropbox/notes/2021.org")
          "** TODO %?\n  %i")
-        ("j" "Journal" entry (file+datetree "~/Dropbox/notes/2020.org")
+        ("j" "Journal" entry (file+datetree "~/Dropbox/notes/2021.org")
          "** %?\n %i")
         ))
 
@@ -225,7 +227,7 @@
 (global-company-mode)
 (setq tab-always-indent t)
 ;; if set tng wont work
-(setq company-idle-delay 0.2)
+(setq company-idle-delay 0.5)
 (setq company-minimum-prefix-length 1)
 ;; (setq tab-always-indent 'complete
 ;;       completion-at-point-functions '(company-select-next))
@@ -259,6 +261,7 @@
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'org-mode)
 (add-to-list 'aggressive-indent-excluded-modes 'groovy-mode)
+(add-to-list 'aggressive-indent-excluded-modes 'cider-repl)
 
 (helm-cider-mode 1)
 
@@ -270,7 +273,7 @@
 ;; (setq helm-dash-common-docsets (helm-dash-installed-docsets))
 ;; Sorting is necessary
 (setq helm-dash-common-docsets '("tldr" "ClojureDocs" "Clojure" "Emacs_Lisp" "PostgreSQL" "Ansible"))
-
+(setq dash-docs-enable-debugging nil)
 
 ;; it formats buffer and attempts to return to original position.
 (defun cider-format-buffer-back () (interactive)
@@ -564,14 +567,14 @@ KBSIZE is a floating point number, defaulting to `helm-default-kbsize'."
 (set-default 'truncate-lines nil)
 
 ;; JS
-(add-to-list 'company-backends 'company-tern)
-(add-hook 'js2-mode-hook (lambda ()
-                           (tern-mode)
-                           (prettier-js-mode)
-                           (company-mode)))
+;; (add-to-list 'company-backends 'company-tern)
+;; (add-hook 'js2-mode-hook (lambda ()
+;;                            (tern-mode)
+;;                            (prettier-js-mode)
+;;                            (company-mode)))
 
-(add-to-list 'magic-mode-alist '(".*\n?import React" . rjsx-mode))
-(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+;; (add-to-list 'magic-mode-alist '(".*\n?import React" . rjsx-mode))
+;; (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
 
 ;; Disable completion keybindings, as we use xref-js2 instead
 ;; (define-key tern-mode-keymap (kbd "M-.") nil)
@@ -585,3 +588,24 @@ KBSIZE is a floating point number, defaulting to `helm-default-kbsize'."
 ;;   (redraw-frame))
 
 ;; (global-set-key (kbd "<up>") 'my-up)
+
+;; Olivetti
+;; Look & Feel for long-form writing
+
+;; Set the body text width
+(setq olivetti-body-width 80)
+
+;; Enable Olivetti for text-related mode such as Org Mode
+;; (add-hook 'text-mode-hook 'olivetti-mode)
+
+(require 'org-tempo)
+
+
+(require 'flycheck-clj-kondo)
+(dolist (checker '(clj-kondo-clj clj-kondo-cljs clj-kondo-cljc clj-kondo-edn))
+  (setq flycheck-checkers (cons checker (delq checker flycheck-checkers))))
+(dolist (checkers '((clj-kondo-clj . clojure-joker)
+                    (clj-kondo-cljs . clojurescript-joker)
+                    (clj-kondo-cljc . clojure-joker)
+                    (clj-kondo-edn . edn-joker)))
+  (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers))))

@@ -6,7 +6,7 @@ xrandr --auto
 
 if xrandr | grep "$extern disconnected"; then
     echo "Xft.dpi: 96" | xrdb -merge
-    xrandr --output "$extern" --off --output "$intern" --auto
+    xrandr --output "$extern" --off --output "$intern" --auto --dpi 96
 else
     echo "Xft.dpi: 144" | xrdb -merge
     xrandr --output "$intern" --off --output "$extern" --auto --dpi 144
