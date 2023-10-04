@@ -3,25 +3,22 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(beacon-blink-duration 0.2)
  '(beacon-size 30)
  '(cider-eval-result-duration 'command)
  '(cider-pprint-fn 'fipp)
  '(cider-repl-display-help-banner nil)
  '(cider-repl-print-length 40)
- '(cider-repl-use-pretty-printing nil)
+ '(cider-repl-use-pretty-printing t)
  '(cider-save-file-on-load t)
  '(cider-save-files-on-cider-refresh t)
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(create-lockfiles nil)
- '(custom-enabled-themes '(solarized-light))
+ '(custom-enabled-themes '(solarized-dark))
  '(custom-safe-themes
-   '("7aaee3a00f6eb16836f5b28bdccde9e1079654060d26ce4b8f49b56689c51904" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "7152ab5bf548cc6215efc513442e7bb59de9eff4b5737eaed3a1a4f42789612c" "cdb4ffdecc682978da78700a461cdc77456c3a6df1c1803ae2dd55c59fa703e3" "6bf841f77d5eb01455d82ae436e3e25277daaef4ee855a3572589dad1b3ac4b3" "bea7148314bcbc2d33a21d301caaac02b2a0d69a585b4b967fa53a314529e861" "a68670dce845d18af9ec87716b4d4c2ea071271eccc80242be4d232c58b3cca2" "5cd4770f787ad997ca9243662728031766736fc12f310b822a93de3c51d81878" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" default))
+   '("fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c" "efcecf09905ff85a7c80025551c657299a4d18c5fcfedd3b2f2b6287e4edd659" "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "57a29645c35ae5ce1660d5987d3da5869b048477a7801ce7ab57bfb25ce12d3e" "7aaee3a00f6eb16836f5b28bdccde9e1079654060d26ce4b8f49b56689c51904" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "7152ab5bf548cc6215efc513442e7bb59de9eff4b5737eaed3a1a4f42789612c" "cdb4ffdecc682978da78700a461cdc77456c3a6df1c1803ae2dd55c59fa703e3" "6bf841f77d5eb01455d82ae436e3e25277daaef4ee855a3572589dad1b3ac4b3" "bea7148314bcbc2d33a21d301caaac02b2a0d69a585b4b967fa53a314529e861" "a68670dce845d18af9ec87716b4d4c2ea071271eccc80242be4d232c58b3cca2" "5cd4770f787ad997ca9243662728031766736fc12f310b822a93de3c51d81878" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" default))
  '(dash-docs-docsets-path "/home/ghost/.local/share/Zeal/Zeal/docsets")
- '(fci-rule-color "#383838")
  '(flyspell-duplicate-distance 40000)
  '(flyspell-issue-message-flag nil)
  '(flyspell-issue-welcome-flag nil)
@@ -32,7 +29,6 @@
  '(helm-etags-fuzzy-match t)
  '(helm-follow-mode-persistent t)
  '(helm-swoop-speed-or-color t)
- '(interprogram-paste-function 'x-cut-buffer-or-selection-value t)
  '(ispell-complete-word-dict nil)
  '(ispell-dictionary "en_US")
  '(ispell-silently-savep t)
@@ -41,16 +37,16 @@
    '(" " "%e" mode-line-front-space mode-line-mule-info mode-line-modified mode-line-frame-identification mode-line-buffer-identification sml/pos-id-separator mode-line-position smartrep-mode-line-string
      (vc-mode vc-mode)
      sml/pre-modes-separator mode-line-modes mode-line-misc-info mode-line-end-spaces))
- '(nrepl-message-colors
-   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(org-agenda-files
-   '("~/Dropbox/notes/2020.org" "~/Dropbox/notes/2017.org" "~/Dropbox/notes/2018.org" "~/Dropbox/notes/2019.org"))
+   '("~/Dropbox/notes/2022.org" "~/Dropbox/notes/2021.org" "~/Dropbox/notes/2020.org" "~/Dropbox/notes/2019.org"))
  '(org-confirm-babel-evaluate nil)
  '(org-startup-folded nil)
  '(org-startup-truncated nil)
  '(package-selected-packages
-   '(flycheck-clj-kondo olivetti company-tern tern eglot indium helm-ag gotest parseedn pos-tip flycheck-julia julia-repl julia-mode window-number flyspell-correct-popup go-rename bm rust-mode helm-bm f flyspell-correct transient lsp-mode parseclj rich-minority exec-path-from-shell helm-descbinds helm-projectile go-complete php-mode zprint-mode simpleclip lsp-ui company-lsp async ht counsel-dash backward-forward go-guru magit-popup go-projectile hl-todo avy cider clojure-mode ghub git-commit helm helm-core sesman scss-mode rjsx-mode company-go go-mode deadgrep ansible-doc ansible company-ansible with-editor yaml-mode dockerfile-mode clj-refactor cider-spy helm-swoop company-quickhelp indicators gtk-pomodoro-indicator counsel-etags csv-mode pkgbuild-mode company-terraform terraform-mode key-chord flycheck-joker reverse-im window-numbering shell-pop markdown-mode helm-dash solarized-theme solarized groovy-mode xclip prettier-js visual-regexp helm-cider aggressive-indent ranger geiser json-mode js2-mode rainbow-mode elisp-slime-nav rainbow-delimiters company counsel swiper ivy zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))
+   '(clojure-ts-mode web-mode consult orderless vertico compat git-modes hcl-mode lua-mode magit-section seq a dash-docs dash-functional eldoc flymake gh js2-refactor json-process-client json-snatcher jsonrpc logito marshal multiple-cursors pcache popup project s spinner super-save xref flycheck-clj-kondo olivetti eglot indium helm-ag gotest parseedn pos-tip flycheck-julia julia-repl julia-mode window-number flyspell-correct-popup go-rename bm rust-mode helm-bm f flyspell-correct transient lsp-mode parseclj rich-minority exec-path-from-shell helm-descbinds helm-projectile go-complete php-mode zprint-mode simpleclip lsp-ui company-lsp async ht counsel-dash backward-forward go-guru magit-popup go-projectile hl-todo avy cider clojure-mode ghub git-commit helm helm-core sesman scss-mode rjsx-mode company-go go-mode deadgrep ansible-doc ansible company-ansible with-editor yaml-mode dockerfile-mode clj-refactor cider-spy helm-swoop company-quickhelp indicators gtk-pomodoro-indicator counsel-etags csv-mode pkgbuild-mode company-terraform terraform-mode key-chord flycheck-joker reverse-im window-numbering shell-pop markdown-mode helm-dash solarized-theme solarized groovy-mode xclip prettier-js visual-regexp helm-cider aggressive-indent ranger geiser json-mode js2-mode rainbow-mode elisp-slime-nav rainbow-delimiters company counsel swiper ivy zop-to-char zenburn-theme which-key volatile-highlights undo-tree smartrep smartparens smart-mode-line operate-on-number move-text magit projectile ov imenu-anywhere guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major dash crux browse-kill-ring beacon anzu ace-window))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
+ '(pos-tip-background-color "#00000")
+ '(pos-tip-foreground-color "#ffffff")
  '(projectile-mode-line '(:eval (format " <%s>" (projectile-project-name))))
  '(ranger-cleanup-eagerly t t)
  '(ranger-max-tabs 3)
@@ -63,30 +59,8 @@
      (lambda nil
        (ansi-term shell-pop-term-shell))))
  '(shell-pop-universal-key nil)
- '(telega-msg-show-sender-status t)
- '(telega-socks5-proxy nil)
- '(vc-annotate-background "#2B2B2B")
- '(vc-annotate-color-map
-   '((20 . "#BC8383")
-     (40 . "#CC9393")
-     (60 . "#DFAF8F")
-     (80 . "#D0BF8F")
-     (100 . "#E0CF9F")
-     (120 . "#F0DFAF")
-     (140 . "#5F7F5F")
-     (160 . "#7F9F7F")
-     (180 . "#8FB28F")
-     (200 . "#9FC59F")
-     (220 . "#AFD8AF")
-     (240 . "#BFEBBF")
-     (260 . "#93E0E3")
-     (280 . "#6CA0A3")
-     (300 . "#7CB8BB")
-     (320 . "#8CD0D3")
-     (340 . "#94BFF3")
-     (360 . "#DC8CC3")))
- '(vc-annotate-very-old-color "#DC8CC3")
  '(x-select-enable-clipboard t))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -94,20 +68,23 @@
  ;; If there is more than one, they won't work right.
  )
 
+
+(setq x-gtk-use-system-tooltips nil)
+
 (prelude-require-packages '(ranger
-                            ansible
+                            ;; ansible
                             ;; ansible-doc
-                            aggressive-indent
+                            ;; aggressive-indent
                             helm-cider
                             visual-regexp
                             which-key
                             reverse-im
                             flycheck-joker
                             crux
-                            prettier-js
+                            ;; prettier-js
                             helm-ag
                             xclip
-                            groovy-mode
+                            ;; groovy-mode
                             ;; window-number
                             solarized-theme
                             helm-dash
@@ -115,7 +92,7 @@
                             shell-pop
                             window-numbering
                             ;; company-terraform
-                            terraform-mode
+                            ;; terraform-mode
                             indicators
                             olivetti
                             ;; clj-refactor
@@ -128,14 +105,13 @@
                             ;; julia-mode
                             ;; julia-repl
                             ;; flycheck-julia
-                            rjsx-mode
-                            tern
-                            company-tern
+
                             flycheck-clj-kondo
+                            zprint-mode
                             ))
 (window-numbering-mode)
 
-(setq prelude-theme 'solarized-light)
+;; (setq prelude-theme 'solarized-light)
 ;; (load-theme 'smart-mode-line-respectful)
 (setq default-frame-alist '((font . "Source Code Pro-14")))
 (scroll-bar-mode -1)
@@ -152,17 +128,19 @@
 (setq org-babel-clojure-backend 'cider)
 (customize-save-variable 'org-confirm-babel-evaluate nil)
 
-(setq org-default-notes-file "~/Dropbox/notes/2021.org")
+(setq org-default-notes-file "~/Dropbox/notes/2023.org")1
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+datetree "~/Dropbox/notes/2021.org")
+      '(("t" "Todo" entry (file+datetree "~/Dropbox/notes/2023.org")
          "** TODO %?\n  %i")
-        ("j" "Journal" entry (file+datetree "~/Dropbox/notes/2021.org")
+        ("j" "Journal" entry (file+datetree "~/Dropbox/notes/2023.org")
          "** %?\n %i")
         ))
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
 
+
+(define-key global-map (kbd "C-y") 'yank)
 
 ;;(setq key-chord-two-keys-delay .05  key-chord-one-key-delay .1)
 
@@ -214,7 +192,7 @@
 ;; clipboard
 (customize-save-variable 'x-select-enable-clipboard t)
 (customize-save-variable 'save-interprogram-paste-before-kill t)
-(customize-save-variable 'interprogram-paste-function 'x-cut-buffer-or-selection-value)
+;; (customize-save-variable 'interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;;  smartparens
 (sp-pair "(" ")" :wrap "C-(")
@@ -227,7 +205,7 @@
 (global-company-mode)
 (setq tab-always-indent t)
 ;; if set tng wont work
-(setq company-idle-delay 0.5)
+(setq company-idle-delay 0.4)
 (setq company-minimum-prefix-length 1)
 ;; (setq tab-always-indent 'complete
 ;;       completion-at-point-functions '(company-select-next))
@@ -239,6 +217,7 @@
 (define-key company-active-map (kbd "<backtab>") 'company-select-previous)
 (define-key company-active-map (kbd "RET") 'company-complete-selection)
 ;; (define-key company-mode-map [remap indent-for-tab-command] #'company-indent-or-complete-common)
+
 
 (require 'flycheck-joker)
 
@@ -258,10 +237,10 @@
 ;; (setq golden-ratio-auto-scale t)
 
 ;; aggresive ident mode
-(global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes 'org-mode)
-(add-to-list 'aggressive-indent-excluded-modes 'groovy-mode)
-(add-to-list 'aggressive-indent-excluded-modes 'cider-repl)
+;; (global-aggressive-indent-mode 1)
+;; (add-to-list 'aggressive-indent-excluded-modes 'org-mode)
+;; (add-to-list 'aggressive-indent-excluded-modes 'groovy-mode)
+;; (add-to-list 'aggressive-indent-excluded-modes 'cider-repl)
 
 (helm-cider-mode 1)
 
@@ -609,3 +588,7 @@ KBSIZE is a floating point number, defaulting to `helm-default-kbsize'."
                     (clj-kondo-cljc . clojure-joker)
                     (clj-kondo-edn . edn-joker)))
   (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers))))
+
+(require 'zprint-mode)
+
+(menu-bar-mode -1)
