@@ -1,6 +1,6 @@
 #!/bin/bash
-intern=eDP1
-extern=DP2
+intern="$(xrandr | grep -Po '(eDP).+(?= connected)')"
+extern="$(xrandr | grep -Po '^(DP).+(?= connected)')"
 
 xrandr --auto
 
