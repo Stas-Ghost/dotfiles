@@ -1,0 +1,133 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "modern"
+[theme.overrides]
+# idle_bg = "#123456"
+# idle_fg = "#abcdef"
+
+[icons]
+icons = "awesome6"
+[icons.overrides]
+# bat = " | | "
+# bat_full = " |X| "
+# bat_charging = " |^| "
+# bat_discharging = " |v| "
+
+[[block]]
+block = "cpu"
+interval = 20
+format = "$icon $utilization "
+format_alt = " $icon $barchart $utilization $max_frequency "
+
+# [[block]]
+# block = "load"
+# format = " $icon $1m.eng(w:3) "
+# interval = 10
+
+[[block]]
+block = "temperature"
+format = "$icon $max"
+format_alt = " $icon $min min, $max max, $average avg "
+interval = 20
+# inputs = ["*-isa-*", "acpitz-acpi-0"]
+chip = "*-acpi-*"
+[block.theme_overrides]
+# idle_fg = "#FD9720"
+# idle_bg = "#000000"
+
+[[block]]
+block = "memory"
+format = "$mem_used "
+interval = 5
+warning_mem = 80
+critical_mem = 95
+[block.theme_overrides]
+idle_fg = "#FD9720"
+idle_bg = "#000000"
+
+# [[block]]
+# block = "disk_space"
+# path = "/"
+# info_type = "available"
+# alert_unit = "GB"
+# interval = 200
+# warning = 20.0
+# alert = 10.0
+# format = " $available.eng(w:2)"
+
+[[block]]
+block = "battery"
+format = "$icon $percentage {$time|} $power "
+# not_charging_format = "no"
+# charging_format = "ch"
+# empty_format = "empty"
+driver = "sysfs"
+# device = "BAT0"
+
+[[block.click]]
+button = "left"
+cmd = "xfce4-power-manager-settings"
+# full_threshold = 100
+
+[[block]]
+block = "net"
+# device = "wlp1s0"
+format = "$icon $ssid $signal_strength"
+format_alt = "$icon $ssid $signal_strength $frequency $bitrate $ip"
+[[block.click]]
+button = "right"
+cmd = "cmst"
+[block.theme_overrides]
+idle_fg = "#A6E22D"
+idle_bg = "#000000"
+
+[[block]]
+block = "toggle"
+format = "$icon"
+command_state = "systemctl is-active  --user redshift | grep -v inactive"
+command_on = "systemctl start --user redshift"
+command_off = "systemctl stop --user redshift"
+interval = 100
+
+[[block]]
+block = "backlight"
+format = "$icon$brightness "
+step_width = 1
+minimum = 1
+[block.theme_overrides]
+idle_fg = "#a0e020"
+idle_bg = "#000000"
+
+
+[[block]]
+block = "sound"
+format = "$icon {$volume.eng(w:2) |}$output_name"
+max_vol = 100
+step_width = 2
+headphones_indicator = true
+[block.theme_overrides]
+idle_fg = "#fd9720"
+# idle_bg = "#000000"
+[block.mappings]
+"alsa_output.pci-0000_00_1f.3.hdmi-stereo" = "LG"
+"alsa_output.pci-0000_00_1f.3.analog-stereo" = "MSI"
+"alsa_output.usb-FIFINE_Microphones_fifine_Microphone_REV1.0-00.analog-stereo" = "Mic"
+
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+[[block]]
+block = "tea_timer"
+format = " $icon {$minutes:$seconds |}"
+done_cmd = "notify-send -t 100000 -u critical -w 'Timer Finished' 'Tea time!'"
+# merge_with_next = true
+[block.theme_overrides]
+idle_fg = "#FD9720"
+idle_bg = "#000000"
+
+[[block]]
+block = "time"
+interval = 5
+format = "$timestamp.datetime(f:'%a %m/%d %R') "
