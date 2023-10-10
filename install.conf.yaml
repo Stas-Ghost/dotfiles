@@ -13,3 +13,4 @@
     ~/.config/tilda/config_0: tilda
     ~/.ctags: ctags
     ~/.emacs.d/personal/custom.el: custom.el
+    ~/.wezterm.lua: wezterm.lua
